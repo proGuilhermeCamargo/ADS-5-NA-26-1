@@ -133,23 +133,23 @@ import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import axios from "axios";
 
-export default function App() {
-    const [value, setValue] = useState("")
+export default function App () {
+    const [agua, balde] = useState("")
 
-    const requestApi = async () => {
-         axios.get("http://localhost:3000/teste").then((resposta) => {
-             console.log("RESPOSTA DA API", resposta.data)
-             setValue(resposta.data)
-         })
+    const chamaApi = async () => {
+        await axios.get("http://localhost:3000/coca").then((resposta) => {
+            console.log("RESPOSTA DA API", resposta.data)
+            balde(resposta.data)
+        })
     }
 
     useEffect(() => {
-        requestApi()
+        chamaApi()
     }, [])
 
     return(
-        <View style={estilo.container}>
-            <Text>{value}</Text>
+        <View>
+            <Text>{agua}</Text>
         </View>
     )
 }
